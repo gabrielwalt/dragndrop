@@ -1,7 +1,8 @@
 /* Author: Gabriel Walt */
 /* Minimalistic Web Server (node.js v0.4.12) */
 
-// Dependencies
+// Dependencies ////////////////////////////////////////////////////////////////
+
 var http   = require("http"),
     url    = require("url"),
     path   = require("path"),
@@ -10,12 +11,14 @@ var http   = require("http"),
     mime   = require("./lib/mime.js")("text/html"),
     mu     = require("./lib/mu");
 
-// Initialization
+// Initialization ////////////////////////////////////////////////////////////////
+
 config.fileNotFoundFile  = path.join(process.cwd(), path.normalize(config.contentRoot+"/"+config.fileNotFound));
 config.internalErrorFile = path.join(path.normalize(config.contentRoot+"/"+config.internalError));
 mu.templateRoot = config.templateRoot;
 
-// Server
+// Server ////////////////////////////////////////////////////////////////
+
 http.createServer(function (request, response) {
     try {
         var uri = config.contentRoot + url.parse(request.url).pathname,
@@ -29,7 +32,7 @@ http.createServer(function (request, response) {
 
 console.log("Server running at http://"+config.serverHost+":"+config.serverPort+"/");
 
-/* Functions ====================================================================== */
+// Functions ////////////////////////////////////////////////////////////////
 
 // Verifies if the requested file exists as on the file system, or if it exists as JSON format and needs to be rendered
 function serveOrRender(request, response, file, statusCode) {

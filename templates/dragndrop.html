@@ -20,21 +20,18 @@ document.documentElement.className+=' js';
     <header>
         <h1>{{title}}</h1>
     </header>
-    <div id="content" class="content">
+    <section id="content" class="content">
         {{#content}}
-            <section id="element-{{id}}" class="element">
+            <article id="element-{{id}}" class="element">
                 <header>
                     <h3>{{id}}</h3>
                     <h2>{{title}}</h2>
                 </header>
                 <p class="weight"><span class="legend">Weight</span> <span class="value">{{weight}}</span></p>
                 <p class="density"><span class="legend">Density</span> <span class="value">{{density}}</span></p>
-            </section>
+            </article>
         {{/content}}
-    </div>
-    <footer>
-        <p>{{author}}</p>
-    </footer>
+    </section>
     <script defer src="/js/jquery.js"></script>
     <script defer src="/js/jquery-dragndrop.js"></script>
     <script defer src="/js/script.js"></script>
