@@ -1,0 +1,43 @@
+{
+    "template": "dragndrop.html",
+    "title": "Two",
+    "author": "Gabriel Walt",
+    "content": [
+        {
+            "id": "n",
+            "title": "Nitrogen",
+            "weight": 14.0067,
+            "density": 0.0012506
+        },
+        {
+            "id": "o",
+            "title": "Oxygen",
+            "weight": 15.9994,
+            "density": 0.001429
+        },
+        {
+            "id": "f",
+            "title": "Fluorine",
+            "weight": 18.9984032,
+            "density": 0.001696
+        },
+        {
+            "id": "ne",
+            "title": "Neon",
+            "weight": 20.1797,
+            "density": 0.0008999
+        },
+        {
+            "id": "na",
+            "title": "Sodium",
+            "weight": 22.98976928,
+            "density": 0.971
+        },
+        {
+            "id": "mg",
+            "title": "Magnesium",
+            "weight": 24.3050,
+            "density": 1.738
+        }
+    ]
+}

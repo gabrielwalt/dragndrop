@@ -1,0 +1,8 @@
+{
+    "template": "error.html",
+    "title": "File Not Found",
+    "description": "Exercise for the Adobe/Day engineering team",
+    "author": "Gabriel Walt",
+    "pageTitle": "Four-Oh-Four.",
+    "decription": "The requested URL was not found on this server."
+}

@@ -1,0 +1,43 @@
+{
+    "template": "dragndrop.html",
+    "title": "One",
+    "author": "Gabriel Walt",
+    "content": [
+        {
+            "id": "h",
+            "title": "Hydrogen",
+            "weight": 1.00794,
+            "density": 0.00008988
+        },
+        {
+            "id": "he",
+            "title": "Helium",
+            "weight": 4.002602,
+            "density": 0.0001785
+        },
+        {
+            "id": "li",
+            "title": "Lithium",
+            "weight": 6.941,
+            "density": 0.534
+        },
+        {
+            "id": "be",
+            "title": "Beryllium",
+            "weight": 9.012182,
+            "density": 1.85
+        },
+        {
+            "id": "b",
+            "title": "Boron",
+            "weight": 10.811,
+            "density": 2.34
+        },
+        {
+            "id": "c",
+            "title": "Carbon",
+            "weight": 12.0107,
+            "density": 2.267
+        }
+    ]
+}

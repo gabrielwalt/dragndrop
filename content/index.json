@@ -1,0 +1,20 @@
+{
+    "template": "frameset.html",
+    "title": "Drag'n Drop",
+    "description": "Exercise for the Adobe/Day engineering team",
+    "author": "Gabriel Walt",
+    "frameset": [
+        {
+            "name": "one",
+            "page": "pages/one.html"
+        },
+        {
+            "name": "two",
+            "page": "pages/two.html"
+        },
+        {
+            "name": "three",
+            "page": "pages/three.html"
+        }
+    ]
+}

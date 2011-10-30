@@ -1,0 +1,8 @@
+{
+    "template": "error.html",
+    "title": "Server Error",
+    "description": "Exercise for the Adobe/Day engineering team",
+    "author": "Gabriel Walt",
+    "pageTitle": "Five-Hundred!",
+    "decription": "Something went terribly wrong."
+}
