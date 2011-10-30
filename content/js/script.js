@@ -28,4 +28,13 @@ jQuery(function ($) {
                 return false;
             });
     });
+    
+    window.hello = function () {
+        console.log(window.location.href);
+    }
+    $(document).click(function () {
+        console.log('click');
+        top.left.hello();
+        top.right.hello();
+    });
 });
