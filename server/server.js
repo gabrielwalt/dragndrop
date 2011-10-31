@@ -58,7 +58,7 @@ function serveOrRender(request, response, file, statusCode) {
             
             } else {
                 // Check if a JSON version of the requested HTML document exists
-                if (file.slice(file.length-5) == ".html") {
+                if (file.slice(file.length-5) === ".html") {
                     var jsonFile = file.slice(0, file.length-5) + ".json";
     
                     // Check if the JSON file exists by trying to read it
@@ -127,10 +127,10 @@ function serveFile(request, response, file, statusCode) {
 }
 
 function pageNotFound(request, response, statusCode) {
-    if (statusCode == 200) {
+    if (statusCode === 200) {
         serveOrRender(request, response, config.fileNotFoundFile, 404);
     } else {
-        serverError(request, response, "Cannot find error page for status code "+statusCode, (statusCode==500));
+        serverError(request, response, "Cannot find error page for status code "+statusCode, (statusCode === 500));
     }
 }
 

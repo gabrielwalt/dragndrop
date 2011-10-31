@@ -1,8 +1,13 @@
 /* Author: Gabriel Walt */
+/* Depends on Modernizr draganddrop and hasevent */
 
 (function ($) {
+"use strict";
 
-function dragndrop(container, elementSelector, conf) {
+// Returns boolean telling if the drag and drop features are supported by the current browser
+var isSupported = (Modernizr.draganddrop || "ontouchstart" in window);
+
+function DragnDrop(container, elementSelector, conf) {
     var g = { // Set of variables that will might be made global, depending on settings
             "instances": [], // Will contain the list of all dragndrop instances
             "selectedElements": $([]), // Elements that have been selected for drag & dropping
@@ -28,6 +33,7 @@ function dragndrop(container, elementSelector, conf) {
     
     g.instances.push(this);
     updatePositions();
+    container.addClass(conf.enabledClass);
     
     // Events ////////////////////////////////////////////////////////////////
     
@@ -40,7 +46,7 @@ function dragndrop(container, elementSelector, conf) {
             return false;
         })
         .bind("dragstart.dragndrop", function (event) {
-            if (typeof event.target.textContent == "string") { // Geko hack
+            if (typeof event.target.textContent === "string") { // Geko hack
                 event.originalEvent.dataTransfer.setData("text/plain", event.target.textContent);
             }
             dragStart($(this));
@@ -50,13 +56,13 @@ function dragndrop(container, elementSelector, conf) {
         .bind("dragover.dragndrop touchmove.dragndrop", function (event) {
             event.preventDefault(); // Required by spec for making drop events work
             event.stopPropagation(); // Prevent window dragover event to be fired
-            if (typeof event.originalEvent.dataTransfer == "object") {
-                event.originalEvent.dataTransfer.dropEffect = 'copy';
+            if ("dataTransfer" in event.originalEvent) {
+                event.originalEvent.dataTransfer.dropEffect = "copy";
             }
-            var position = (typeof event.originalEvent.changedTouches == "object") ?
+            var position = ("changedTouches" in event.originalEvent) ?
                 event.originalEvent.changedTouches[0].clientY :
                 position = event.clientY;
-            if (positionTop != position) {
+            if (positionTop !== position) {
                 positionTop = position;
                 g.dragging = true;
                 dragMove();
@@ -73,6 +79,9 @@ function dragndrop(container, elementSelector, conf) {
     $(window)
         .bind("click.dragndrop", function () {
             deselect();
+        })
+        .bind("dragover.dragndrop", function () {
+            removePlaceholders();
         });
     
     // Functions ////////////////////////////////////////////////////////////////
@@ -80,7 +89,7 @@ function dragndrop(container, elementSelector, conf) {
     this.removePlaceholder = function () {
         lastPosition = null;
         placeholder.remove();
-    }
+    };
     
     function removePlaceholders() {
         for (var i in g.instances) {
@@ -96,19 +105,19 @@ function dragndrop(container, elementSelector, conf) {
             element.addClass(conf.selectedClass);
             g.selectedElements = g.selectedElements.add(element);
         }
-    };
+    }
 
     function deselect() {
         g.selectedElements.removeClass(conf.selectedClass);
         g.selectedElements = $([]);
-    };
+    }
 
     function dragStart(element) {
         if (!element.hasClass(conf.selectedClass)) {
             element.addClass(conf.selectedClass);
             g.selectedElements = g.selectedElements.add(element);
         }
-    };
+    }
 
     function drop() {
         if (g.selectedElements.length) {
@@ -126,24 +135,24 @@ function dragndrop(container, elementSelector, conf) {
                 }, conf.highlightDuration);
             }
             
-            if (typeof conf.ondrop == "function") {
+            if (typeof conf.ondrop === "function") {
                 conf.ondrop.apply(container, [selected]);
             }
         }
         removePlaceholders();
-    };
+    }
 
     function dragMove(element) {
         if (g.selectedElements.length) {
             var position = getInsertPosition();
-            if (!lastPosition || lastPosition.i != position.i) {
+            if (!lastPosition || lastPosition.i !== position.i) {
                 lastPosition = position;
                 removePlaceholders();
                 placeholder[position.insert](position.element);
                 updatePositions();
             }
         }
-    };
+    }
 
     function updatePositions() {
         var count = 0;
@@ -162,29 +171,33 @@ function dragndrop(container, elementSelector, conf) {
                 "element": element
             });
         });
-    };
+    }
 
     function getInsertPosition() {
         for (var i = 1, l = positions.length; i < l && positionTop > positions[i].top; ++i);
         return positions[i-1];
-    };
+    }
 }
 
 // jQuery plugin ////////////////////////////////////////////////////////////////
 
 $.fn.dragndrop = function (elementSelector, conf) {
-    conf = $.extend({
-        "ondrop"            : null, // Callback for triggering things when dropping items
-        "placeholder"       : "<div class='dragndrop-placeholder'></div>", // Used to show where elements are inserted when dropping
-        "selectedClass"     : "dragndrop-selected", // Used to highlight selected elements
-        "droppedClass"      : "dragndrop-dropped", // Used to highlight dropped elements
-        "highlightDuration" : 1, // Time in milliseconds how long the dropped class will be displayed
-        "multiple"          : true // activates support of mutiple dragndrop instances, but also declares a global variable
-    }, conf);
+    if (isSupported) {
+        conf = $.extend({
+            "ondrop"            : null, // Callback for triggering things when dropping items
+            "placeholder"       : "<div class='dragndrop-placeholder'></div>", // Used to show where elements are inserted when dropping
+            "enabledClass"      : "dragndrop-enabled",  // Used to tell that dragndrop is enabled on that container element
+            "selectedClass"     : "dragndrop-selected", // Used to highlight selected elements
+            "droppedClass"      : "dragndrop-dropped",  // Used to highlight dropped elements
+            "highlightDuration" : 1, // Time in milliseconds how long the dropped class will be displayed
+            "multiple"          : true // activates support of mutiple dragndrop instances, but also declares a global variable
+        }, conf);
 
-    return this.each(function () {
-        new dragndrop($(this), elementSelector, conf);
-    });
+        this.each(function () {
+            new DragnDrop($(this), elementSelector, conf);
+        });
+    }
+    return this;
 };
 
 })(jQuery);

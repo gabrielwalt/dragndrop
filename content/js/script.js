@@ -1,8 +1,27 @@
 /* Author: Gabriel Walt */
 
 jQuery(function ($) {
-    // The whole drag'n drop fun
-    $(".content").dragndrop(".element", { "ondrop": ondrop });
+    "use strict";
+    
+    var messagerTimeout = null;
+    
+    // Display message to the visitor with a small popup
+    function messager(message) {
+        var m = $("#messager").text(message).slideDown();
+        if (messagerTimeout) {
+            clearTimeout(messagerTimeout);
+        }
+        messagerTimeout = setTimeout(function () {
+            m.slideUp();
+        }, 2000);
+    }
+    
+    // Defensive logger
+    function log(data) {
+        if (typeof console !== "undefined" && typeof console.log === "function") {
+            console.log(data);
+        }
+    }
     
     // Send the dropped data to the server and popup a confirmation message to the user
     // The post format is looking like this: { "content": "myid0", "element-1": "myid1", "element-2": "myid2" }
@@ -29,23 +48,6 @@ jQuery(function ($) {
         
     }
     
-    // Display message to the visitor with a small popup
-    messager.element = $("#messager");
-    messager.timeout = null;
-    function messager(message) {
-        messager.element.text(message).slideDown();
-        if (messager.timeout) {
-            clearTimeout(messager.timeout);
-        }
-        messager.timeout = setTimeout(function () {
-            messager.element.slideUp();
-        }, 2000);
-    }
-    
-    // Defensive logger
-    function log(data) {
-        if (typeof console != "undefined" && typeof console.log == "function") {
-            console.log(data);
-        }
-    }
+    // The whole drag'n drop fun
+    $(".content").dragndrop(".element", { "ondrop": ondrop });
 });

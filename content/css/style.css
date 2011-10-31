@@ -26,15 +26,17 @@ body {
 	padding: 5px;
 	border: 1px solid;
 	border-color: #999 #777 #666 #777;
-  	border-radius: 5px;
   	-webkit-border-radius: 5px;
   	-moz-border-radius: 5px;
+  	border-radius: 5px;
 	background: #222;
 }
 a.element,
 a.element:hover {
 	text-decoration: none;
 	color: white;
+}
+a.element:focus {
 	outline: none;
 }
 .element h3 {
@@ -65,21 +67,18 @@ a.element:hover {
 
 /* The whole dragndrop story */
 
-.js .element {
+.dragndrop-enabled .element {
 	cursor: move;
-	user-drag: element;
-	-khtml-user-drag: element;
-	-webkit-user-drag: element;
-	user-select: none;
 	-khtml-user-select: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
-	transition: background-color 200ms linear;
+	user-select: none;
     -moz-transition: background-color 200ms linear;
     -o-transition: background-color 200ms linear;
     -webkit-transition: background-color 200ms linear;
+	transition: background-color 200ms linear;
 }
-.js .element:hover {
+.dragndrop-enabled .element:hover {
 	background: #333;
 }
 .touch .element:hover {
@@ -97,9 +96,9 @@ a.element:hover {
 .dragndrop-placeholder {
 	height: 5px;
 	background: #f80;
-  	border-radius: 5px;
   	-webkit-border-radius: 5px;
   	-moz-border-radius: 5px;
+  	border-radius: 5px;
 }
 
 /* The popup messager */
@@ -113,9 +112,9 @@ a.element:hover {
 	padding: 10px 5px 5px;
 	line-height: 15px;
 	border: 1px solid #999;
-  	border-radius: 5px;
   	-webkit-border-radius: 5px;
   	-moz-border-radius: 5px;
+  	border-radius: 5px;
 	color: #fff;
 	background: #222;
 	font-weight: bold;
