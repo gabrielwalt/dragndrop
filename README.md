@@ -12,7 +12,7 @@ Exercise for the Adobe/Day engineering team – by Gabriel Walt
 ### Implemented a sweet drag & drop jQuery library from scratch that features:
 * Uses the HTML5 events
 * Vertically reorderable elements
-* Multiple selections are possible
+* Multiple selections are possible by simply clicking on them (so I didn't make it with CTRL/CMD click, because I think it is more useable as it is now)
 * Selection and dragging over different frames as well as different areas within the same document supported
 * Elements and classes used are fully configurable
 * It creates one global variable, but this can be disabled if not needing the multi-frame feature

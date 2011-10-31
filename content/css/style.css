@@ -6,6 +6,8 @@ body {
 	background: #444;
 }
 
+/* The columns of the dragndropMulti.html template */
+
 .multi {
 	overflow: hidden;
 }
@@ -14,6 +16,8 @@ body {
 	width: 48%;
 	margin-right: 10px;
 }
+
+/* The element */
 
 .element {
 	display: block;
@@ -113,4 +117,3 @@ a.element:hover {
 	background: #222;
 	font-weight: bold;
 }
-
