@@ -6,7 +6,9 @@ body {
 	background: #444;
 }
 
-/* The columns of the dragndropMulti.html template */
+.content {
+	min-height: 100px;
+}
 
 .multi {
 	overflow: hidden;

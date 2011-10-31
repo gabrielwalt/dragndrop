@@ -2,19 +2,28 @@ Drag'n Drop
 ===========
 
 Exercise for the Adobe/Day engineering team – by Gabriel Walt
+See: https://github.com/gabrielwalt/dragndrop
 
-### Browsers (more may work):
-* Chrome 15
-* Firefox 7
-* Desktop Safari 5
-* Ipad Safari 5
-* Internet Explorer 8 - works, but there is a bug making that most of the time the text gets selected rather than starting the drag & drop
+Simply open frames.html or noframes.html
 
-### Implemented a sweet drag & drop jQuery library from scratch that features:
+### Known Supported Browsers:
+* Chrome 15 (perfectly supported)
+* Firefox 7 (perfectly supported)
+* Desktop Safari 5 (perfectly supported)
+* iPad Safari 5 [0]
+* Internet Explorer 8 [1]
+
+### Known Not Supported Browsers:
+* Firefox 3.6 [2]
+* Opera 10 [3]
+* Internet Explorer 7 [4]
+
+### Implemented an HTML5 drag & drop jQuery library from scratch that features:
 * Uses the HTML5 events
+* Uses Modernizr for feature detecting the support of HTML5 drag & drop events
 * Vertically reorderable elements
 * Multiple selections are possible by simply clicking on them
-* Contrary to what was asked, I didn't make the multi-select with CTRL/CMD+click, that makes it simpler, more useable and also makes it compatible with touch devices
+* Contrary to what was asked, I didn't make the multi-select with CTRL/CMD+click, because that would make it less useable and breaking support of touch devices
 * Supports touch devices with the limitation that it doesn't allow dropping to another frame
 * Selection and dragging over different frames as well as different areas within the same document supported
 * Elements and classes used are fully configurable
@@ -48,3 +57,15 @@ This will display a test page with tree frames and some dummy content to drag ar
 To test another use-case with several drag&drop areas on the same page (without frames), you can also checkout the following page:
 
     http://127.0.0.1:8080/pages/multi.html
+
+### Notes:
+
+[0] Because of iOS limitation, it only supports drag & drop within the same frame, not to another frame.
+
+[1] It kind of works, but a very annoying bug makes that most of the time some text gets selected, rather than starting the drag & drop. There must be a way to fix that, but I didn't find it yet.
+
+[2] Actually the script works, but Firefox 3.6 has an HTML5 parsing bug that splits inline elements that contain block-level elements (but HTML5-wise it is legal to have <a><h1>foo</h1><p>bar</p></a>). And IE requires the dragable elements to be links or images (when using the HTML5 drag&drop events). I wanted to use the HTML5 drag&drop (because I wanted to test them), wanted to use block-level elements inside the draggable element, and wanted to have a chance to support IE, so as far as I know, this inevitabely breaks FF 3.6 support.
+
+[3] Opera doesn't support the HTML5 drag&drop events, feature detection simply nicely prevents the script from being executed. With the mess the HTML5 drag&drop events are, I can't blame them.
+
+[4] IE7 (as well as IE6 as far as I have read online) support the HTML5 drag&drop events, so theoretically there should be a way to support them. But as long as I couldn't fix 100% of the IE8 bugs I didn't even dive into testing IE7.
