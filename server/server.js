@@ -91,20 +91,18 @@ function renderTemplate(request, response, content, statusCode) {
         mu.render(json.template, json, {}, function (err, output) {
             try {
                 if (err) {
-                    serverError(request, response, err);
+                    serverError(request, response, err, true);
                 } else {
                     console.log("200 "+request.url);
-                    response.writeHead(200, {"Content-Type": "text/html"});
+                    response.writeHead(statusCode, {"Content-Type": "text/html"});
                     output
                         .addListener("data", function (c) { response.write(c); })
-                        .addListener("end", function () {
-                            response.end();
-                        });
+                        .addListener("end", function () { response.end(); });
                 }
-            } catch (err) { serverError(request, response, err); }
+            } catch (err) { serverError(request, response, err, true); }
         });
     } else {
-        serverError(request, response, "Template property is missing on content.");
+        serverError(request, response, "Template property is missing on content.", true);
     }
 
 }
@@ -118,15 +116,12 @@ function serveFile(request, response, file, statusCode) {
     
     fs.readFile(file, "binary", function (err, file) {
         if (err) {
-            statusCode = 500;
-            response.writeHead(statusCode, {"Content-Type": "text/plain"});
-            response.write(err+"\n");
-            console.error(err);
+            serverError(request, response, err, true);
         } else {
             response.writeHead(statusCode, {"Content-Type": contentType});
             response.write(file, "binary");
+            response.end();
         }
-        response.end();
         console.log(statusCode+" "+request.url);
     });
 }
@@ -135,13 +130,20 @@ function pageNotFound(request, response, statusCode) {
     if (statusCode == 200) {
         serveOrRender(request, response, config.fileNotFoundFile, 404);
     } else {
-        serverError(request, response, "Cannot find error page for status code "+statusCode);
+        serverError(request, response, "Cannot find error page for status code "+statusCode, (statusCode==500));
     }
 }
 
 // Display error page and log
-function serverError(request, response, err) {
-    serveOrRender(request, response, config.internalErrorFile, 500);
+function serverError(request, response, err, dontRender) {
+    if (dontRender) {
+        statusCode = 500;
+        response.writeHead(statusCode, {"Content-Type": "text/plain"});
+        response.write(err+"\n");
+        response.end();
+    } else {
+        serveOrRender(request, response, config.internalErrorFile, 500);
+    }
     if (err) {
         if (err.message && err.stack) {
             console.error(err.message);

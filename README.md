@@ -29,5 +29,18 @@ Exercise for the Adobe/Day engineering team – by Gabriel Walt
 * The JSON files contain a "template" property that tells what template to use to render it out
 * 404 and 500 error codes supported that will redirect to the configurred files
 
+### Test Script:
+Start the node.js server:
+    cd server
+    node server.js 127.0.0.1 8080
+
+Then take your browser and go to url:
+    http://127.0.0.1:8080
+
+This will display a test page with tree frames and some dummy content to drag around.
+
+To test another use-case with several drag&drop areas on the same page (without frames), you can also checkout the following page:
+    http://127.0.0.1:8080/pages/multi.html
+
 ### Ideas for improvement:
 * Support mobile browser for the drag & drop
