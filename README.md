@@ -4,11 +4,11 @@ Drag'n Drop
 Exercise for the Adobe/Day engineering team – by Gabriel Walt
 
 ### Browsers (more may work):
-* Internet Explorer 8
-* Firefox 7
 * Chrome 15
+* Firefox 7
 * Desktop Safari 5
 * Ipad Safari 5
+* Internet Explorer 8 - works, but there is a bug making that most of the time the text gets selected rather than starting the drag & drop
 
 ### Implemented a sweet drag & drop jQuery library from scratch that features:
 * Uses the HTML5 events
