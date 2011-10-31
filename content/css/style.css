@@ -82,6 +82,9 @@ a.element:hover {
 .js .element:hover {
 	background: #333;
 }
+.touch .element:hover {
+	background: #222;
+}
 .dragndrop-selected,
 .js .dragndrop-selected:hover {
 	background: #383838;

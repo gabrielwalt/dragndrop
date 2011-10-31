@@ -5,7 +5,8 @@
 function dragndrop(container, elementSelector, conf) {
     var g = { // Set of variables that will might be made global, depending on settings
             "instances": [], // Will contain the list of all dragndrop instances
-            "selectedElements": $([]) // Elements that have been selected for drag & dropping
+            "selectedElements": $([]), // Elements that have been selected for drag & dropping
+            "dragging": false // Needed for the touch version
         },
         placeholder = $(conf.placeholder), // The placeholder that shows where things will be dropped
         positions = [], // Tells where elements should be inserted based on their Y positions, see updatePositions()
@@ -33,7 +34,9 @@ function dragndrop(container, elementSelector, conf) {
     $(elementSelector, container)
         .attr("draggable", "true")
         .bind("click.dragndrop", function () {
-            selectToggle($(this));
+            if (!g.dragging) {
+                selectToggle($(this));
+            }
             return false;
         })
         .bind("dragstart.dragndrop", function (event) {
@@ -44,28 +47,32 @@ function dragndrop(container, elementSelector, conf) {
         });
     
     container
-        .bind("dragover.dragndrop", function (event) {
+        .bind("dragover.dragndrop touchmove.dragndrop", function (event) {
             event.preventDefault(); // Required by spec for making drop events work
             event.stopPropagation(); // Prevent window dragover event to be fired
-            if (!$.browser.msie) { // Be gentle with IE or everything falls apart
+            if (typeof event.originalEvent.dataTransfer == "object") {
                 event.originalEvent.dataTransfer.dropEffect = 'copy';
             }
-            if (positionTop != event.clientY) {
-                positionTop = event.clientY;
+            var position = (typeof event.originalEvent.changedTouches == "object") ?
+                event.originalEvent.changedTouches[0].clientY :
+                position = event.clientY;
+            if (positionTop != position) {
+                positionTop = position;
+                g.dragging = true;
                 dragMove();
             }
         })
-        .bind("drop.dragndrop", function () {
-            drop();
-            return false;
+        .bind("drop.dragndrop dragend.dragdrop touchend.dragndrop", function () {
+            if (g.dragging) {
+                g.dragging = false;
+                drop();
+                return false;
+            }
         });
     
     $(window)
         .bind("click.dragndrop", function () {
             deselect();
-        })
-        .bind("dragover.dragndrop", function () {
-            removePlaceholders();
         });
     
     // Functions ////////////////////////////////////////////////////////////////
@@ -127,12 +134,14 @@ function dragndrop(container, elementSelector, conf) {
     };
 
     function dragMove(element) {
-        var position = getInsertPosition();
-        if (!lastPosition || lastPosition.i != position.i) {
-            lastPosition = position;
-            removePlaceholders();
-            placeholder[position.insert](position.element);
-            updatePositions();
+        if (g.selectedElements.length) {
+            var position = getInsertPosition();
+            if (!lastPosition || lastPosition.i != position.i) {
+                lastPosition = position;
+                removePlaceholders();
+                placeholder[position.insert](position.element);
+                updatePositions();
+            }
         }
     };
 

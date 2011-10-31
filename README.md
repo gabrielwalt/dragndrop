@@ -7,12 +7,15 @@ Exercise for the Adobe/Day engineering team – by Gabriel Walt
 * Internet Explorer 8
 * Firefox 7
 * Chrome 15
-* Safari 5
+* Desktop Safari 5
+* Ipad Safari 5
 
 ### Implemented a sweet drag & drop jQuery library from scratch that features:
 * Uses the HTML5 events
 * Vertically reorderable elements
-* Multiple selections are possible by simply clicking on them (so I didn't make it with CTRL/CMD click, because I think it is more useable as it is now)
+* Multiple selections are possible by simply clicking on them
+* Contrary to what was asked, I didn't make the multi-select with CTRL/CMD+click, that makes it simpler, more useable and also makes it compatible with touch devices
+* Supports touch devices with the limitation that it doesn't allow dropping to another frame
 * Selection and dragging over different frames as well as different areas within the same document supported
 * Elements and classes used are fully configurable
 * It creates one global variable, but this can be disabled if not needing the multi-frame feature
@@ -44,6 +47,3 @@ This will display a test page with tree frames and some dummy content to drag ar
 To test another use-case with several drag&drop areas on the same page (without frames), you can also checkout the following page:
 
     http://127.0.0.1:8080/pages/multi.html
-
-### Ideas for improvement:
-* Support mobile browser for the drag & drop
