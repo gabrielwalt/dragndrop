@@ -64,7 +64,7 @@ To test another use-case with several drag&drop areas on the same page (without 
 
 [1] It kind of works, but a very annoying bug makes that most of the time some text gets selected, rather than starting the drag & drop. There must be a way to fix that, but I didn't find it yet.
 
-[2] Actually the script works, but Firefox 3.6 has an HTML5 parsing bug that splits inline elements that contain block-level elements (but HTML5-wise it is legal to have <a><h1>foo</h1><p>bar</p></a>). And IE requires the dragable elements to be links or images (when using the HTML5 drag&drop events). I wanted to use the HTML5 drag&drop (because I wanted to test them), wanted to use block-level elements inside the draggable element, and wanted to have a chance to support IE, so as far as I know, this inevitabely breaks FF 3.6 support.
+[2] Actually the script works, but Firefox 3.6 has an HTML5 parsing bug that splits inline elements that contain block-level elements (but HTML5-wise it is legal to have `<a><h1>foo</h1><p>bar</p></a>`). And IE requires the dragable elements to be links or images (when using the HTML5 drag&drop events). I wanted to use the HTML5 drag&drop (because I wanted to test them), wanted to use block-level elements inside the draggable element, and wanted to have a chance to support IE, so as far as I know, this inevitabely breaks FF 3.6 support.
 
 [3] Opera doesn't support the HTML5 drag&drop events, feature detection simply nicely prevents the script from being executed. With the mess the HTML5 drag&drop events are, I can't blame them.
 
