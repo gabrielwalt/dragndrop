@@ -23,7 +23,8 @@ Exercise for the Adobe/Day engineering team – by Gabriel Walt
 ### Using a customized HTML5 Boilerplate for a start:
 * Using a custom verion of the HTML5 shiv, inlined in the HTML head element for optimization
 * Insted of setting a no-js class when JS is not present, I'm adding a js class if it is present
-* Removing modernizr, favicons and all the build and test scripts
+* Added an optimized version of Modernizr that only contains the drag & drop detection functions
+* Removing favicons and all the build and test scripts
 
 ### Created a minimalistic node.js HTTP server for fun:
 * I know, this is not part of the drag & drop exercise, but I wanted to try out node.js
