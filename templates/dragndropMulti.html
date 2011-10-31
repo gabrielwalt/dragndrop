@@ -19,18 +19,23 @@ document.documentElement.className+=' js';
 <body>
     <header>
         <h1>{{title}}</h1>
+        <p>{{description}}</p>
     </header>
-    <div id="{{id}}" class="content">
-        {{#content}}
-            <section id="{{id}}" class="element">
-                <header>
-                    <h3>{{id}}</h3>
-                    <h2>{{title}}</h2>
-                </header>
-                <p class="weight"><span class="legend">Weight</span> <span class="value">{{weight}}</span></p>
-                <p class="density"><span class="legend">Density</span> <span class="value">{{density}}</span></p>
+    <div class="multi">
+        {{#multi}}
+            <section id="{{id}}" class="content">
+                {{#content}}
+                    <article id="{{id}}" class="element">
+                        <header>
+                            <h3>{{id}}</h3>
+                            <h2>{{title}}</h2>
+                        </header>
+                        <p class="weight"><span class="legend">Weight</span> <span class="value">{{weight}}</span></p>
+                        <p class="density"><span class="legend">Density</span> <span class="value">{{density}}</span></p>
+                    </article>
+                {{/content}}
             </section>
-        {{/content}}
+        {{/multi}}
     </div>
     <div id="messager"></div>
     <script defer src="/js/jquery.js"></script>

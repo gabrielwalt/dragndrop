@@ -2,6 +2,7 @@
     "template": "dragndrop.html",
     "title": "Three",
     "author": "Gabriel Walt",
+    "id": "three",
     "content": [
         {
             "id": "al",
