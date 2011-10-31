@@ -22,19 +22,19 @@ document.documentElement.className+=' js';
     </header>
     <div id="{{id}}" class="content">
         {{#content}}
-            <section id="{{id}}" class="element">
+            <a id="{{id}}" class="element">
                 <header>
                     <h3>{{id}}</h3>
                     <h2>{{title}}</h2>
                 </header>
                 <p class="weight"><span class="legend">Weight</span> <span class="value">{{weight}}</span></p>
                 <p class="density"><span class="legend">Density</span> <span class="value">{{density}}</span></p>
-            </section>
+            </a>
         {{/content}}
     </div>
     <div id="messager"></div>
-    <script defer src="/js/jquery.js"></script>
-    <script defer src="/js/jquery-dragndrop.js"></script>
-    <script defer src="/js/script.js"></script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery-dragndrop.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>

@@ -44,7 +44,7 @@ jQuery(function ($) {
     
     // Defensive logger
     function log(data) {
-        if (console && typeof console.log == "function") {
+        if (typeof console != "undefined" && typeof console.log == "function") {
             console.log(data);
         }
     }

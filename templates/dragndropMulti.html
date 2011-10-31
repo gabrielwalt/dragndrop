@@ -23,7 +23,7 @@ document.documentElement.className+=' js';
     </header>
     <div class="multi">
         {{#multi}}
-            <section id="{{id}}" class="content">
+            <a id="{{id}}" class="content" href="#{{id}}">
                 {{#content}}
                     <article id="{{id}}" class="element">
                         <header>
@@ -34,7 +34,7 @@ document.documentElement.className+=' js';
                         <p class="density"><span class="legend">Density</span> <span class="value">{{density}}</span></p>
                     </article>
                 {{/content}}
-            </section>
+            </a>
         {{/multi}}
     </div>
     <div id="messager"></div>

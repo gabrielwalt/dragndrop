@@ -13,8 +13,15 @@ var http   = require("http"),
 
 // Initialization ////////////////////////////////////////////////////////////////
 
+if (process.argv.length < 4) {
+    console.log("\nSyntax:\nnode server.js 127.0.0.1 8080\n");
+    return;
+}
+
 config.fileNotFoundFile  = path.join(process.cwd(), path.normalize(config.contentRoot+"/"+config.fileNotFound));
 config.internalErrorFile = path.join(path.normalize(config.contentRoot+"/"+config.internalError));
+config.serverHost = process.argv[2];
+config.serverPort = process.argv[3];
 mu.templateRoot = config.templateRoot;
 
 // Server ////////////////////////////////////////////////////////////////

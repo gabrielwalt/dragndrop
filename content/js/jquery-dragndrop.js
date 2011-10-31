@@ -27,23 +27,29 @@ function dragndrop(container, elementSelector, conf) {
     
     g.instances.push(this);
     updatePositions();
-    $(elementSelector, container).attr("draggable", "true");
     
     // Events ////////////////////////////////////////////////////////////////
     
-    container
-        .delegate(elementSelector, "click.dragndrop", function () {
+    $(elementSelector, container)
+        .attr("draggable", "true")
+        .bind("click.dragndrop", function () {
             selectToggle($(this));
             return false;
         })
-        .delegate(elementSelector, "dragstart.dragndrop", function (event) {
-            event.originalEvent.dataTransfer.setData("text/plain", event.target.textContent); // Geko hack
+        .bind("dragstart.dragndrop", function (event) {
+            if (typeof event.target.textContent == "string") { // Geko hack
+                event.originalEvent.dataTransfer.setData("text/plain", event.target.textContent);
+            }
             dragStart($(this));
-        })
+        });
+    
+    container
         .bind("dragover.dragndrop", function (event) {
             event.preventDefault(); // Required by spec for making drop events work
             event.stopPropagation(); // Prevent window dragover event to be fired
-            event.originalEvent.dataTransfer.dropEffect = 'copy';
+            if (!$.browser.msie) { // Be gentle with IE or everything falls apart
+                event.originalEvent.dataTransfer.dropEffect = 'copy';
+            }
             if (positionTop != event.clientY) {
                 positionTop = event.clientY;
                 dragMove();
