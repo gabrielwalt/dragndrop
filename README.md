@@ -28,6 +28,7 @@ Simply open frames.html or noframes.html
 * Selection and dragging over different frames as well as different areas within the same document supported
 * Elements and classes used are fully configurable
 * It creates one global variable, but this can be disabled if not needing the multi-frame feature
+* Even if I've assigned an ID to every draggable element, they are not needed for the script to work
 
 ### Using a customized HTML5 Boilerplate for a start:
 * Using a custom verion of the HTML5 shiv, inlined in the HTML head element for optimization

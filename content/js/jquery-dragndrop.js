@@ -60,8 +60,8 @@ function DragnDrop(container, elementSelector, conf) {
                 event.originalEvent.dataTransfer.dropEffect = "copy";
             }
             var position = ("changedTouches" in event.originalEvent) ?
-                event.originalEvent.changedTouches[0].clientY :
-                position = event.clientY;
+                event.originalEvent.changedTouches[0].pageY :
+                position = event.pageY;
             if (positionTop !== position) {
                 positionTop = position;
                 g.dragging = true;
