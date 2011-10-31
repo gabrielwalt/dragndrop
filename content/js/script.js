@@ -3,7 +3,8 @@
 jQuery(function ($) {
     "use strict";
     
-    var messagerTimeout = null;
+    var postUri = "/post.json",
+        messagerTimeout = null;
     
     // Display message to the visitor with a small popup
     function messager(message) {
@@ -38,13 +39,13 @@ jQuery(function ($) {
         
         log(postData);
         
-        $.post("/post.json", postData, function (response) {
+        $.post(postUri, postData, function (response) {
             if (response.message) {
                 var message = response.message+": "+elementTitles;
                 log(message);
                 messager(message);
             }
-        });
+        }, "json");
         
     }
     
