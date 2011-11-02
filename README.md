@@ -3,8 +3,6 @@ Drag'n Drop
 
 Exercise for the Adobe/Day engineering team – by Gabriel Walt
 
-Simply open frames.html or noframes.html
-
 ### Known Supported Browsers:
 * Chrome 15 (perfectly supported)
 * Firefox 7 (perfectly supported)
