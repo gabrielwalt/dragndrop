@@ -2,7 +2,6 @@ Drag'n Drop
 ===========
 
 Exercise for the Adobe/Day engineering team – by Gabriel Walt
-See: https://github.com/gabrielwalt/dragndrop
 
 Simply open frames.html or noframes.html
 
